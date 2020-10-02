@@ -15,7 +15,7 @@ public interface BoardMapper {
 	public BoardVO getBoardDetail(int board_seq);
 	
 	/** 게시글 등록 */
-	public void insertBoard(BoardVO boardVO);
+	public int insertBoard(BoardVO boardVO);
 	
 	/** 게시글 수정 */
 	public int updateBoard(BoardVO boardVO);

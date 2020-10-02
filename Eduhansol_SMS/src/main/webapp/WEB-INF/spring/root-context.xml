@@ -67,5 +67,6 @@
 	 	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryOracle"></property>
 	</bean>
 	
+	<context:component-scan base-package="kr.co.eduhansol.sms.*.service" />
 
 </beans>
