@@ -23,18 +23,34 @@ import lombok.extern.log4j.Log4j;
 public class DataSourceTests {
 
 	@Setter(onMethod_ = { @Autowired })
+	private DataSource dataSourceMssql;
+	
+	/*@Setter(onMethod_ = { @Autowired })
 	private DataSource dataSourceMysql;
 
 	@Setter(onMethod_ = { @Autowired })
-	private DataSource dataSourceOracle;
+	private DataSource dataSourceOracle;*/
 	
 	@Setter(onMethod_ = { @Autowired })
+	private SqlSessionFactory sqlSessionFactoryMssql;
+	
+	/*@Setter(onMethod_ = { @Autowired })
 	private SqlSessionFactory sqlSessionFactoryMysql;
 	
 	@Setter(onMethod_ = { @Autowired })
-	private SqlSessionFactory sqlSessionFactoryOracle;
+	private SqlSessionFactory sqlSessionFactoryOracle;*/
 	
 	@Test
+	public void testConnectionMssql() {
+
+		try (Connection con = dataSourceMssql.getConnection()) {
+			log.info(con);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+	
+	/*@Test
 	public void testConnectionMysql() {
 
 		try (Connection con = dataSourceMysql.getConnection()) {
@@ -52,9 +68,20 @@ public class DataSourceTests {
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-	}
+	}*/
 	
 	@Test
+	public void testMyBatisMssql() {
+
+		try (SqlSession session = sqlSessionFactoryMssql.openSession(); Connection con = session.getConnection();) {
+			log.info(session);
+			log.info(con);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+	
+	/*@Test
 	public void testMyBatisMysql() {
 
 		try (SqlSession session = sqlSessionFactoryMysql.openSession(); Connection con = session.getConnection();) {
@@ -74,5 +101,5 @@ public class DataSourceTests {
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-	}
+	}*/
 }

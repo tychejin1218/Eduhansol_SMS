@@ -5,7 +5,7 @@ import java.util.List;
 import kr.co.eduhansol.sms.annotation.mapper.MapperScanMysql;
 import kr.co.eduhansol.sms.sample.domain.BoardVO;
 
-@MapperScanMysql
+//@MapperScanMysql
 public interface BoardMapper {
 
 	/** 게시글 목록 조회 */

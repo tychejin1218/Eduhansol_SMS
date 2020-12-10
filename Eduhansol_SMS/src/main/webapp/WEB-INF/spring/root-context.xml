@@ -10,9 +10,50 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
- 
+ 	
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+        	<value>classpath:/config/datasource.properties</value>
+        </property>
+    </bean>
+    
+ 	<!-- Mssql -->
+	<bean id="hikariConfigMssql" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="${mssql.driverClassName}"></property>
+		<property name="jdbcUrl" value="${mssql.jdbcUrl}"></property>
+		<property name="username" value="${mssql.username}"></property>
+		<property name="password" value="${mssql.password}"></property>
+	</bean>
+	
+	<!-- <bean id="hikariConfigMssql" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"></property>
+		<property name="jdbcUrl" value="jdbc:sqlserver://202.89.125.167:1433;DatabaseName=HSSMSDB;SelectMethod=cursor"></property>
+		<property name="username" value="hssmsuser"></property>
+		<property name="password" value="hssmsuser#18"></property>
+	</bean> -->
+	          
+	<bean id="dataSourceMssql" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfigMssql" />
+	</bean>
+	
+	<bean id="sqlSessionFactoryMssql" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceMssql"></property>
+		<property name="mapperLocations" value="classpath*:/mapper/mssql/**/*.xml" />
+	</bean>
+	
+	<bean id="sqlSessionMssql" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryMssql" />
+	</bean>
+	
+	<bean id="sqlScannerMssql" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	 	<property name="basePackage" value="kr.co.eduhansol.sms.*.mapper"></property>	 	     
+	 	<property name="annotationClass" value="kr.co.eduhansol.sms.annotation.mapper.MapperScanMssql"></property>                               
+	 	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryMysql"></property>
+	</bean>
+	
+	
 	<!-- Mysql -->
-	<bean id="hikariConfigMysql" class="com.zaxxer.hikari.HikariConfig">
+	<!-- <bean id="hikariConfigMysql" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>		                                        
 		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://localhost:3306/board?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC"></property>
 		<property name="username" value="board"></property>
@@ -36,12 +77,12 @@
 	 	<property name="basePackage" value="kr.co.eduhansol.sms.*.mapper"></property>	 	     
 	 	<property name="annotationClass" value="kr.co.eduhansol.sms.annotation.mapper.MapperScanMysql"></property>                               
 	 	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryMysql"></property>
-	</bean>
+	</bean> -->
 	
 	
 	
 	<!-- Oracle -->
-	<bean id="hikariConfigOracle" class="com.zaxxer.hikari.HikariConfig">
+	<!-- <bean id="hikariConfigOracle" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl"></property>
 		<property name="username" value="board"></property>
@@ -65,7 +106,7 @@
 	 	<property name="basePackage" value="kr.co.eduhansol.sms.*.mapper"></property>
 	 	<property name="annotationClass" value="kr.co.eduhansol.sms.annotation.mapper.MapperScanOracle"></property>
 	 	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryOracle"></property>
-	</bean>
+	</bean> -->
 	
 	<context:component-scan base-package="kr.co.eduhansol.sms.*.service" />
 

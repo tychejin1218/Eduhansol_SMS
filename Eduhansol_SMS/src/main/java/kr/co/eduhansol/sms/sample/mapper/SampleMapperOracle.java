@@ -5,7 +5,7 @@ import java.util.Map;
 
 import kr.co.eduhansol.sms.annotation.mapper.MapperScanOracle;
 
-@MapperScanOracle
+//@MapperScanOracle
 public interface SampleMapperOracle {
 	             
 	public List<Map<String, String>> getSampleList();

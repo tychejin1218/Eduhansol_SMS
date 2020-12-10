@@ -15,7 +15,7 @@ import kr.co.eduhansol.sms.sample.service.BoardService;
 @Service
 public class BoardServiceImpl implements BoardService {
 
-	@Autowired
+	//@Autowired
 	private BoardMapper boardMapper;
 
 	/** 게시글 목록 조회 */
