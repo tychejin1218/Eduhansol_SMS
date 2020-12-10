@@ -1,7 +1,0 @@
-INDEX VERSION 1.3+C:\board\Eduhansol_SMS-workspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-3051105560.index
-1926134416.index
-2790168717.index
-3969613603.index
-1054114639.index
-3651420925.index

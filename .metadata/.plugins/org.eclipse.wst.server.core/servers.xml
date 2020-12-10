@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<servers>
-  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Eduhansol_SMS-config" deployDir="wtpwebapps" hostname="localhost" id="Eduhansol_SMS" name="Eduhansol_SMS" runtime-id="Eduhansol_SMS" server-type="org.eclipse.jst.server.tomcat.85" server-type-id="org.eclipse.jst.server.tomcat.85" start-timeout="180" stop-timeout="15" testEnvironment="true" timestamp="5">
-    <list key="modules" value0="Eduhansol_SMS::org.eclipse.jst.jee.server:Eduhansol_SMS::jst.web::2.5"/>
-  </server>
-</servers>
